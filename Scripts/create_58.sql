@@ -13,24 +13,24 @@
 -- Create tables
 CREATE TABLE accounts (
 account_number      NUMBER(8),
-sort_code           CHAR(8),
-balance             NUMBER(10,2) DEFAULT'0',
-bank_name           VARCHAR2(20),
-first_name          VARCHAR2(15),
-last_name           VARCHAR2(20),
+sort_code           CHAR(8) NOT NULL,
+balance             NUMBER(10,2),
+bank_name           VARCHAR2(20) NOT NULL,
+first_name          VARCHAR2(15) NOT NULL,
+last_name           VARCHAR2(20) NOT NULL,
 address_line_1      VARCHAR2(20),
 address_line_2      VARCHAR2(20),
 town                VARCHAR2(30),
 county              VARCHAR2(15),
 postcode            VARCHAR2(8),
-country             CHAR(2) DEFAULT'UK',
-contact_number      VARCHAR2(15),
-email               VARCHAR2(25) UNIQUE);
+country             CHAR(2),
+contact_number      VARCHAR2(15) NOT NULL,
+email               VARCHAR2(25));
 
 CREATE TABLE account_managers (
 manager_id          NUMBER(4),
-first_name          VARCHAR2(15),
-last_name           VARCHAR2(20) );
+first_name          VARCHAR2(15) NOT NULL,
+last_name           VARCHAR2(20) NOT NULL);
 
 CREATE TABLE invoices (
 invoice_id          NUMBER(8),
@@ -48,7 +48,7 @@ total_price         NUMBER(10,2) );
 CREATE TABLE customer_cards (
 card_number         NUMBER(16),
 account_number      NUMBER(8),
-security_code       NUMBER(3) );
+security_code       NUMBER(3) NOT NULL);
 
 CREATE TABLE payments (
 invoice_id          NUMBER(8),
@@ -56,7 +56,7 @@ card_number         NUMBER(16) );
 
 CREATE TABLE products (
 product_id          NUMBER(8),
-product_name        VARCHAR2(15),
+product_name        VARCHAR2(15) NOT NULL,
 product_description VARCHAR2(80) );
 
 -- Create sequence
@@ -77,4 +77,10 @@ SELECT TNAME FROM TAB;
 SELECT SEQUENCE_NAME, MIN_VALUE, MAX_VALUE, INCREMENT_BY, LAST_NUMBER FROM user_sequences;
 SELECT CONSTRAINT_NAME FROM USER_CONSTRAINTS;
 
-DESC accounts
+DESC accounts;
+DESC account_managers;
+DESC invoices;
+DESC invoice_items;
+DESC customer_cards;
+DESC payments;
+DESC products;

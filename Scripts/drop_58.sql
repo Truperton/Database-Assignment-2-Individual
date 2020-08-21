@@ -15,21 +15,79 @@ SELECT CONSTRAINT_NAME FROM USER_CONSTRAINTS
 WHERE CONSTRAINT_NAME NOT LIKE 'SYS%';
 
 -- Foreign key drops
--- courses foreign keys
-ALTER TABLE courses
-DROP CONSTRAINT fk_c_subject_areas;
+-- invoices foreign keys
+ALTER TABLE invoices
+DROP CONSTRAINT fk_i_accounts;
+ALTER TABLE invoices
+DROP CONSTRAINT fk_i_account_managers;
+
+-- invoice items foreign keys
+ALTER TABLE invoice_items
+DROP CONSTRAINT fk_it_invoices;
+ALTER TABLE invoice_items
+DROP CONSTRAINT fk_it_products;
+
+-- customer cards foreign keys
+ALTER TABLE customer_cards
+DROP CONSTRAINT fk_cc_accounts;
+
+-- payments foreign keys
+ALTER TABLE payments
+DROP CONSTRAINT fk_p_invoices;
+ALTER TABLE payments
+DROP CONSTRAINT fk_p_customer_cards;
 
 -- Primary key drops
--- sites primary keys
-ALTER TABLE sites
-DROP CONSTRAINT pk_sites;
+-- accounts primary keys
+ALTER TABLE accounts
+DROP CONSTRAINT pk_accounts;
+
+-- account managers primary keys
+ALTER TABLE account_managers
+DROP CONSTRAINT pk_account_managers;
+
+-- invoices primary keys
+ALTER TABLE invoices
+DROP CONSTRAINT pk_invoices;
+
+-- invoice items primary keys
+ALTER TABLE invoice_items
+DROP CONSTRAINT pk_invoice_items;
+
+-- customer cards primary keys
+ALTER TABLE customer_cards
+DROP CONSTRAINT pk_customer_cards;
+
+-- payments primary keys
+ALTER TABLE payments
+DROP CONSTRAINT pk_payments;
+
+-- products primary keys
+ALTER TABLE products
+DROP CONSTRAINT pk_products;
+
+-- Unique drops
+-- accounts unique
+ALTER TABLE accounts
+DROP CONSTRAINT uk_accounts_email;
+-- products unique
+ALTER TABLE products
+DROP CONSTRAINT uk_products_product_name;
 
 -- Check drops
--- students checks
-ALTER TABLE students
-DROP CONSTRAINT ck_upper_students_st_fname;
-ALTER TABLE students
-DROP CONSTRAINT ck_upper_students_st_sname;
+-- accounts checks
+ALTER TABLE accounts
+DROP CONSTRAINT ck_upper_accounts_bank_name;
+ALTER TABLE accounts
+DROP CONSTRAINT ck_upper_accounts_first_name;
+ALTER TABLE accounts
+DROP CONSTRAINT ck_upper_accounts_last_name;
+
+-- account managers checks
+ALTER TABLE account_managers
+DROP CONSTRAINT ck_upper_account_m_first_name;
+ALTER TABLE account_managers
+DROP CONSTRAINT ck_upper_account_m_last_name;
 
 -- Table drops
 DROP TABLE accounts;
